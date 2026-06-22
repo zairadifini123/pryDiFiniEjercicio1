@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsLibros.cs" />
+    <Compile Include="frmAgregarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgregarLibro.Designer.cs">
+      <DependentUpon>frmAgregarLibro.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGestionDeLibros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,13 +65,25 @@
     <Compile Include="frmInformacionEstudiante.Designer.cs">
       <DependentUpon>frmInformacionEstudiante.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMenuPrincipal.Designer.cs">
+      <DependentUpon>frmMenuPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAgregarLibro.resx">
+      <DependentUpon>frmAgregarLibro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGestionDeLibros.resx">
       <DependentUpon>frmGestionDeLibros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInformacionEstudiante.resx">
       <DependentUpon>frmInformacionEstudiante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMenuPrincipal.resx">
+      <DependentUpon>frmMenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

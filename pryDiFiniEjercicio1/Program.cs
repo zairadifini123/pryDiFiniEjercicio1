@@ -16,7 +16,7 @@ namespace pryDiFiniEjercicio1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGestionDeLibros());
+            Application.Run(new frmMenuPrincipal());
         }
     }
 }

@@ -26,6 +26,7 @@ namespace pryDiFiniEjercicio1
         //Que tablas vamos a usar
         private String Tabla = "Categorias";
         private String Tabla2 = "Libros";
+       
 
         //Variables para calcular etiquetas
         private Decimal total;
@@ -37,7 +38,7 @@ namespace pryDiFiniEjercicio1
         private String aut;
         private Decimal pre;
         private Int32 sto;
-        private String cat;
+        private Int32 idCat;
 
         //Propiedades / Funciones para pasar las variables al formulario
         public Decimal Total
@@ -50,10 +51,10 @@ namespace pryDiFiniEjercicio1
             get { return cantidad; }
         }
 
-        public String Categoria
+        public Int32 IdCategoria
         {
-            get { return cat; }
-            set { cat = value; }
+            get { return idCat; }
+            set { idCat = value; }
         }
 
         public String Codigo
@@ -99,18 +100,17 @@ namespace pryDiFiniEjercicio1
 
                 comando.Connection = conexion;
                 comando.CommandType = CommandType.TableDirect;
-                comando.CommandText = Tabla;
+                comando.CommandText = Tabla; // Categorias
 
-                OleDbDataReader DR = comando.ExecuteReader();
+                adaptador = new OleDbDataAdapter(comando);
 
-                Combo.Items.Clear();
+                DataSet DS = new DataSet();
+                adaptador.Fill(DS, Tabla);
 
-                while (DR.Read())
-                {
-                    Combo.Items.Add(DR.GetString(1));
-                }
+                Combo.DataSource = DS.Tables[Tabla];
+                Combo.DisplayMember = "NombreCategoria";
+                Combo.ValueMember = "IdCategoria";
 
-                DR.Close();
                 conexion.Close();
             }
             catch (Exception e)
@@ -119,7 +119,8 @@ namespace pryDiFiniEjercicio1
             }
         }
 
-       //Carga los datos de la base de datos en el DataGridView según el rubro
+
+        //Carga los datos de la base de datos en el DataGridView según el rubro
         public Decimal CargarDatosGrilla(DataGridView Grilla, String CategoriaBuscada)
         {
             Decimal TotalValorStock = 0;
@@ -319,6 +320,63 @@ namespace pryDiFiniEjercicio1
                 }
 
                 conexion.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        public void AgregarLibro()
+        {
+            try
+            {
+                conexion.ConnectionString = CadenaConexion;
+                conexion.Open();
+
+                comando.Connection = conexion;
+                comando.CommandType = CommandType.TableDirect;
+                comando.CommandText = Tabla2; // Libros
+
+                adaptador = new OleDbDataAdapter(comando);
+
+                DataSet DS = new DataSet();
+                adaptador.Fill(DS, Tabla2);
+
+                DataTable tabla = DS.Tables[Tabla2];
+
+                DataRow fila = tabla.NewRow();
+
+                fila["Codigo"] = cod;
+                fila["Titulo"] = tit;
+                fila["Autor"] = aut;
+                fila["Precio"] = pre;
+                fila["Stock"] = sto;
+                fila["idCategoria"] = idCat;
+
+                tabla.Rows.Add(fila);
+
+                OleDbCommandBuilder ConciliaCambios = new OleDbCommandBuilder(adaptador);
+
+                adaptador.Update(DS, Tabla2);
+
+                conexion.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("No se puede convertir el tipo de dato");
+            }
+            catch (DivideByZeroException)
+            {
+                MessageBox.Show("No se puede dividir por cero");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("El valor del argumento no puede estar vacío");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Índice fuera de la matriz");
             }
             catch (Exception e)
             {
