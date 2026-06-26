@@ -53,6 +53,18 @@
     <Compile Include="frmAgregarLibro.Designer.cs">
       <DependentUpon>frmAgregarLibro.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBuscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscar.Designer.cs">
+      <DependentUpon>frmBuscar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditarLibro.Designer.cs">
+      <DependentUpon>frmEditarLibro.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGestionDeLibros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +87,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAgregarLibro.resx">
       <DependentUpon>frmAgregarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscar.resx">
+      <DependentUpon>frmBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarLibro.resx">
+      <DependentUpon>frmEditarLibro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGestionDeLibros.resx">
       <DependentUpon>frmGestionDeLibros.cs</DependentUpon>

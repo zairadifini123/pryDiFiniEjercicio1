@@ -33,7 +33,6 @@
             this.buscarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reporteDeLibrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +45,6 @@
             this.buscarLibroToolStripMenuItem,
             this.editarLibroToolStripMenuItem,
             this.reporteDeLibrosToolStripMenuItem,
-            this.salirToolStripMenuItem,
             this.salirToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -66,25 +64,21 @@
             this.buscarLibroToolStripMenuItem.Name = "buscarLibroToolStripMenuItem";
             this.buscarLibroToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
             this.buscarLibroToolStripMenuItem.Text = "Buscar libro";
+            this.buscarLibroToolStripMenuItem.Click += new System.EventHandler(this.buscarLibroToolStripMenuItem_Click);
             // 
             // editarLibroToolStripMenuItem
             // 
             this.editarLibroToolStripMenuItem.Name = "editarLibroToolStripMenuItem";
             this.editarLibroToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
             this.editarLibroToolStripMenuItem.Text = "Editar libro";
+            this.editarLibroToolStripMenuItem.Click += new System.EventHandler(this.editarLibroToolStripMenuItem_Click);
             // 
             // reporteDeLibrosToolStripMenuItem
             // 
             this.reporteDeLibrosToolStripMenuItem.Name = "reporteDeLibrosToolStripMenuItem";
             this.reporteDeLibrosToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.reporteDeLibrosToolStripMenuItem.Text = "Reporte de libros";
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(135, 24);
-            this.salirToolStripMenuItem.Text = "Gestión de libros";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.reporteDeLibrosToolStripMenuItem.Click += new System.EventHandler(this.reporteDeLibrosToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem1
             // 
@@ -117,7 +111,6 @@
         private System.Windows.Forms.ToolStripMenuItem buscarLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reporteDeLibrosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
     }
 }

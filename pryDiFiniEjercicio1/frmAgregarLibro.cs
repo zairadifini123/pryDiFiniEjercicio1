@@ -66,7 +66,7 @@ namespace pryDiFiniEjercicio1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            Libros.Codigo = txtCodigo.Text;
+            Libros.Codigo = Convert.ToInt32(txtCodigo.Text);
             Libros.Titulo = txtTitulo.Text;
             Libros.Autor = txtAutor.Text;
             Libros.Precio = Convert.ToDecimal(txtPrecio.Text);

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,7 +34,7 @@ namespace pryDiFiniEjercicio1
         private Int32 cantidad;
 
         //Variables de Artículos
-        private String cod;
+        private Int32 cod;
         private String tit;
         private String aut;
         private Decimal pre;
@@ -57,7 +58,7 @@ namespace pryDiFiniEjercicio1
             set { idCat = value; }
         }
 
-        public String Codigo
+        public Int32 Codigo
         {
             get { return cod; }
             set { cod = value; }
@@ -165,7 +166,7 @@ namespace pryDiFiniEjercicio1
 
                         int i = Grilla.Rows.Add();
 
-                        Grilla.Rows[i].Cells[0].Value = DR.GetString(0);
+                        Grilla.Rows[i].Cells[0].Value = DR.GetInt32(0);
                         Grilla.Rows[i].Cells[1].Value = DR.GetString(1);
                         Grilla.Rows[i].Cells[2].Value = DR.GetString(2);
                         Grilla.Rows[i].Cells[3].Value = DR.GetDecimal(3);
@@ -383,5 +384,118 @@ namespace pryDiFiniEjercicio1
                 MessageBox.Show(e.ToString());
             }
         }
+
+        public void BuscarLibro(Int32 Codigo)
+        {
+            //Para que no se cierre sino que te avise cual es el error
+            try
+            {
+                conexion.ConnectionString = CadenaConexion; //Lo conecta a la base de datos
+                conexion.Open(); //Se abre la base de datos
+
+                comando.Connection = conexion; //Se abre el comando que ejecute la conexion
+                comando.CommandType = CommandType.TableDirect; //Tipo de tabla que se va a usar
+                comando.CommandText = Tabla2;  //Cual es la tabla
+
+                OleDbDataReader DR = comando.ExecuteReader(); //Lee los datos que vamos trayendo, no todos
+
+                if (DR.HasRows)
+                {
+                    while (DR.Read()) //Lee 
+                    {
+                        if (DR.GetInt32(0) == Codigo)
+                        {
+                            cod = DR.GetInt32(0);
+                            tit = DR.GetString(1);
+                            aut = DR.GetString(2);
+                            pre = DR.GetDecimal(3);
+                            sto = DR.GetInt32(4);
+                            idCat = DR.GetInt32(5);
+                        }
+                    }
+                }
+
+                conexion.Close(); //Se cierra
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        public void Modificar(Int32 Codigo)
+        {
+            //Para que no se cierre sino que te avise cual es el error
+            try
+            {
+                String sql = "";
+
+                sql = "UPDATE Libros SET Precio = " + pre.ToString().Replace(",", ".") +
+                      ", Stock = " + sto.ToString() +
+                      " WHERE Codigo = " + Codigo.ToString();
+
+                conexion.ConnectionString = CadenaConexion; //Lo conecta a la base de datos
+                conexion.Open(); //Se abre la base de datos
+
+                comando.Connection = conexion; //Se abre el comando que ejecute la conexion
+                comando.CommandType = CommandType.Text; //Que tipo de comando va a ejecutar sobre una tabla
+                comando.CommandText = sql;  //Recibe la instrucción SQL
+
+                comando.ExecuteNonQuery();
+
+                conexion.Close(); //Se cierra
+            }
+            //catch (Exception e)
+            //{
+            // MessageBox.Show(e.ToString());
+            //}
+            catch (FormatException)
+            {
+                MessageBox.Show("No se puede conmvertir el tipo de dato");
+            }
+            catch (DivideByZeroException)
+            {
+                MessageBox.Show("No se puede dividir por cero");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("El valor del argumento no puede estar vacio");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Indice fuera de la matriz");
+            }
+            finally
+            {
+                //Aca se anota lo que se va a ejecutar siempre
+            }
+        }
+
+        public void Eliminar(Int32 Codigo)
+        {
+            //Para que no se cierre sino que te avise cual es el error
+            try
+            {
+                String sql = "";
+                sql = "DELETE * FROM Libros WHERE Codigo = " + Codigo.ToString();
+
+                conexion.ConnectionString = CadenaConexion; //Lo conecta a la base de datos
+                conexion.Open(); //Se abre la base de datos
+
+                comando.Connection = conexion; //Se abre el comando que ejecute la conexion
+                comando.CommandType = CommandType.Text; //Que tipo de comando va a ejecutar sobre una tabla
+                comando.CommandText = sql;  //Aca recibe la instrucción SQL
+
+                comando.ExecuteNonQuery();
+
+                conexion.Close(); //Se cierra
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+
     }
 }

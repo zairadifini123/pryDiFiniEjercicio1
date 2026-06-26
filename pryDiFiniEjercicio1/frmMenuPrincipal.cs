@@ -33,5 +33,23 @@ namespace pryDiFiniEjercicio1
             frmGestionDeLibros x = new frmGestionDeLibros();
             x.ShowDialog();
         }
+
+        private void buscarLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBuscar x = new frmBuscar();
+            x.ShowDialog();
+        }
+
+        private void editarLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEditarLibro x = new frmEditarLibro();
+            x.ShowDialog();
+        }
+
+        private void reporteDeLibrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGestionDeLibros x = new frmGestionDeLibros();
+            x.ShowDialog();
+        }
     }
 }
